@@ -15,14 +15,20 @@ Servidor MCP minimalista para Ubuntu usando [FastMCP](https://gofastmcp.com). El
    ```bash
    pip install -r requirements.txt
    ```
-4. Suba o servidor MCP (usa o runner do FastMCP):
+4. Suba o servidor MCP (usa o runner do FastMCP) servindo via HTTP:
    ```bash
-   fastmcp run server.py
+   fastmcp run server.py -t http --host 0.0.0.0 --port 8000
    ```
    Se preferir sem ativar a venv, rode pelo caminho completo:
    ```bash
-   venv/bin/fastmcp run server.py
+   venv/bin/fastmcp run server.py -t http --host 0.0.0.0 --port 8000
    ```
+   O endpoint padrão fica em `/mcp/`, então um cliente MCP pode chamar `http://<host>:8000/mcp/`.
+   Se receber “command not found”, verifique se a venv está ativa ou use o caminho completo acima.
+
+## Recursos expostos
+- `resource://about/hello` (text/plain): instruções de uso da tool `hello`.
+- `resource://system/overview` (application/json): panorama rápido do host (hostname, plataforma, versão do Python, timestamp UTC).
    O server expõe a tool `hello`, que responde com um "Hello" e detalhes do host Ubuntu.
 
 ## Arquivos sensíveis
